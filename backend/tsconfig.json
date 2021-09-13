@@ -1,0 +1,12 @@
+{
+	"extends": "../tsconfig.base.json",
+	"compilerOptions": {
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"module": "esnext",
+		"target": "esnext",
+		"moduleResolution": "node",
+		"lib": ["esnext", "webworker"],
+		"types": ["@cloudflare/workers-types", "node"]
+	}
+}
