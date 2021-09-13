@@ -1,0 +1,11 @@
+name = "api"
+type = "javascript"
+zone_id = ""
+account_id = ""
+route = "api.linuslatetips.com/*"
+
+[build]
+command = "npm install && npm run build"
+[build.upload]
+format = "modules"
+main = "./worker.mjs"
