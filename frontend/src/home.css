@@ -1,0 +1,33 @@
+body {
+  background-color: #DEDEDE;
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  color: #1c1b1b;
+  transition: color 0.2s ease-in-out;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+#centered {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+#samDickey {
+  color: white !important;
+}
+
+#centerLink {
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  color: #1c1b1b !important;
+  transition: color 0.2s ease-in-out;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
