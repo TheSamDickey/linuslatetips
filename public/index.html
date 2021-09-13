@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>LinusLateTips</title>
+	<link rel="icon" href="images/LLT.png">
+	<!--  fonts	-->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:500" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<style>
+		body {
+			background-color: #DEDEDE;
+			font-family: Montserrat, sans-serif;
+			font-weight: 500;
+			font-style: normal;
+			color: #1c1b1b;
+			transition: color 0.2s ease-in-out;
+			letter-spacing: 0.2em;
+			text-transform: uppercase;
+		}
+
+		#centered {
+			position: absolute;
+			top: 30%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			text-align: center;
+		}
+
+		#samDickey {
+			color: white !important;
+		}
+
+		#centerLink {
+			font-family: Montserrat, sans-serif;
+			font-weight: 500;
+			font-style: normal;
+			color: #1c1b1b !important;
+			transition: color 0.2s ease-in-out;
+			letter-spacing: 0.2em;
+			text-transform: uppercase;
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+	<div class="container-fluid" style="margin-top:65px">
+		<div class="row">
+			<div class="col-12">
+				<center>
+					<img src="images/linusLateTips.png" style="width: 333px; margin-top: -43px;">
+					<p style="display: inline-block; margin-left: 25px;">Tracking how late Linus is every Friday 7PM CST</p>
+				</center>
+			</div>
+		</div>
+
+		<div class="row" style="margin-top: 180px; width: 100% !important;" id="centered">
+			<div class="col-12">
+				<center>
+					<h2>Live Linus Late Counter:</h2>
+					<br>
+					<h1 style="font-size: 8em !important; color: #DB4105;" id="lateCounter"><b>40m 22s</b></h1>
+					<br>
+					<p id="timerStopped">(timer stopped, stream started)</p>
+										<!-- <h1 style=" color: #DB4105;" id="lateCounter">Timer starts on Friday 7PM CST</h1> -->
+					<br>
+					<br>
+					<br>
+					<a href="records.html" id="centerLink">Check out records of previous late shows!</a>
+				</center>
+			</div>
+		</div>
+	</div>
+
+	<p style="position: absolute; bottom: 50px; right: 25px; float: right;">Intended as a joke. Not created by LTT</p>
+	<div class="container"></div>
+
+	<nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark navbar-brand" style="text-transform: none; color: white !important; padding: 10px; letter-spacing: normal; margin-right: 0px;">
+		Created by <a href="http://thesamdickey.com" id="samDickey">Sam Dickey</a>
+	</nav>
+
+</body>
+
+</html>
+
