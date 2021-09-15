@@ -1,8 +1,17 @@
-name = "api"
+name = "linuslatetips"
 type = "javascript"
 zone_id = ""
 account_id = ""
+workers_dev = true
 route = "api.linuslatetips.com/*"
+
+kv_namespaces = [
+    { binding = "TwitchInfo", id = "", preview_id = "" },
+    { binding = "TwitchMessageIds", id = "", preview_id = "" }
+]
+
+# [secrets]
+# twitchsecret
 
 [build]
 command = "npm install && npm run build"
