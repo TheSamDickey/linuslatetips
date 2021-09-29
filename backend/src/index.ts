@@ -1,8 +1,7 @@
 import { Router } from "itty-router";
-import stream from "stream";
 const router = Router();
 
-import { jsonResponse, Error403, Ok200 } from "./helpers";
+import { Error403, Ok200, OPTIONS, patchResponse } from "./helpers";
 
 const encoder = new TextEncoder();
 
@@ -15,7 +14,7 @@ interface EnvInterface {
 // Twitch Code
 const buf2hex = (buffer: ArrayBuffer) => [...new Uint8Array(buffer)].map((x) => x.toString(16).padStart(2, "0")).join("");
 const validateSignature = async (req: Request, env: EnvInterface) => {
-	// Make sure timestamp isnt older than 10 minutes
+	// Make sure timestamp isn't older than 10 minutes
 	const timestamp = req.headers.get("twitch-eventsub-message-timestamp") || "";
 	if (new Date(timestamp).getTime() < Date.now() - 1000 * 60 * 10) return Error403();
 
@@ -111,6 +110,13 @@ const setEvent = (type: "update" | "online" | "offline") => async (req: Request,
 		streamInfo.categories ??= [category];
 		streamInfo.categories.push(category);
 	} else if (type === "online") {
+		// If a new stream is starting, only grab the latest title & category
+		if(streamInfo.titles !== undefined && streamInfo.titles.length !== -1){ 
+			streamInfo.titles = [streamInfo.titles[streamInfo.titles.length -1]];
+		}
+		if(streamInfo.categories !== undefined && streamInfo.categories.length !== -1){ 
+			streamInfo.categories = [streamInfo.categories[streamInfo.categories.length -1]];
+		}
 		streamInfo.type = (<StreamOnlineEvent>event).type;
 		streamInfo.startedAt = new Date((<StreamOnlineEvent>event).started_at).getTime();
 		streamInfo.id = (<StreamOnlineEvent>event).id;
@@ -135,9 +141,20 @@ router.post("/webhooks/linustech/offline", validateSignature, subRevoke, setEven
 router.post("/webhooks/linustech/update", validateSignature, subRevoke, setEvent("update"));
 
 // Api Code
-router.get("/api/v1/latest", async (req: Request, env: EnvInterface) => new Response(await env.TwitchInfo.get("latest")));
+router.get("/v1/latest", async (req: Request, env: EnvInterface) => new Response(await env.TwitchInfo.get("latest")));
 
-router.all("*", () => new Response("404, Not Found!", { status: 404 }));
+router
+.options("", (req: Request) => OPTIONS(req))
+.all("*", () => new Response("404, Not Found!", { status: 404 }));
+
+
 export default {
-	fetch: router.handle,
-};
+    fetch: async (request: Request, env: EnvInterface) => {
+        try {
+            return patchResponse(await router.handle(request, env));
+        } catch (err) {
+            // return new Response(JSON.stringify(<Error>err), { status: 500 });
+			return new Response((<Error>err).message, { status: 500 });
+        }
+    }
+}
